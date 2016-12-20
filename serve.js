@@ -17,6 +17,7 @@ var lex = require('letsencrypt-express').create({
 
   , approveDomains: approveDomains
 });
+
 function approveDomains(opts, certs, cb) {
   // This is where you check your database and associated
   // email addresses with domains and agreements and such
@@ -39,11 +40,19 @@ function approveDomains(opts, certs, cb) {
 
   cb(null, { options: opts, certs: certs });
 }
+
 // handles acme-challenge and redirects to https
 require('http').createServer(lex.middleware(require('redirect-https')())).listen(80, function () {
   console.log("Listening for ACME http-01 challenges on", this.address());
 });
 
+const restServer = require('restify').createServer({
+  name: 'myapp',
+  version: '1.0.0'
+});
+restServer.use(plugins.acceptParser(server.acceptable));
+restServer.use(plugins.queryParser());
+restServer.use(plugins.bodyParser());
 
 
 var app = require('express')();
@@ -52,6 +61,6 @@ app.use('/', function (req, res) {
 });
 
 // handles your app
-require('https').createServer(lex.httpsOptions, lex.middleware(app)).listen(443, function () {
+require('restify').createServer(lex.httpsOptions, lex.middleware(app)).listen(443, function () {
   console.log("Listening for ACME tls-sni-01 challenges and serve app on", this.address());
 });
