@@ -3,7 +3,8 @@
 // returns an instance of node-letsencrypt with additional helper methods
 var lex = require('letsencrypt-express').create({
   // set to https://acme-v01.api.letsencrypt.org/directory in production
-  server: 'staging'
+  //server: 'staging'
+  server: 'https://acme-v01.api.letsencrypt.org/directory'
 
 // If you wish to replace the default plugins, you may do so here
 //
