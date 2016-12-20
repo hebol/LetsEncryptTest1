@@ -24,7 +24,7 @@ server.once("listening", function() {
 });
 
 
-app.get("/test", function (err, req, res, obj) {
+server.get("/test", function (err, req, res, obj) {
   assert.ifError(err);
   console.log('Server returned: %j', obj);
 });
