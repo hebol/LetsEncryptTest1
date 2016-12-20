@@ -20,6 +20,7 @@ var lex = require('letsencrypt-express').create({
 function approveDomains(opts, certs, cb) {
   // This is where you check your database and associated
   // email addresses with domains and agreements and such
+  console.log('approve Domains', arguments);
 
 
   // The domains being approved for the first time are listed in opts.domains
