@@ -8,7 +8,7 @@ var server = createServer({
   email: 'info@optires.se', // Emailed when certificates expire.
   agreeTos: true, // Required for letsencrypt.
   restify: true,
-  debug: true, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
+  debug: false, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
   domains: ["www.optires.se"], // List of accepted domain names. (You can use nested arrays to register bundles with LE).
   forceSSL: true, // Make this false to disable auto http->https redirects (default true).
   redirectCode: 301, // If forceSSL is true, decide if redirect should be 301 (permanent) or 302 (temporary). Defaults to 302
@@ -25,6 +25,5 @@ server.once("listening", function() {
 
 
 server.get("/test", function (err, req, res, obj) {
-  assert.ifError(err);
   console.log('Server returned: %j', obj);
 });
