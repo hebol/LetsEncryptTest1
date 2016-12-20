@@ -25,7 +25,6 @@ server.once("listening", function() {
 
 
 server.get("/test", function (err, req, res, obj) {
-  assert.ifError(err);
   console.log('Server returned: %j', obj);
   req.send('Florp!');
 });
